@@ -1,13 +1,14 @@
 pipeline {
-    agent {
-            docker {
-                image 'node:slim'
-                reuseNode true
-            }
-    }
+    agent any
 
     stages {
         stage('Hello') {
+            agent {
+                docker {
+                    image 'node:slim'
+                    reuseNode true
+            }
+        }
             steps {
                 sh 'npm --version'
             }
@@ -18,6 +19,12 @@ pipeline {
             }
         }
         stage('NPM test') {
+            agent {
+                docker {
+                    image 'node:slim'
+                    reuseNode true
+            }
+        }
             steps {
                 sh 'npm run test'
             }
