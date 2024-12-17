@@ -3,6 +3,12 @@ pipeline {
 
     stages {
         stage('NPM command') {
+            agent {
+                docker {
+                    image 'node:slim'
+                    reuseNode true
+            }
+        }
             steps {
                 sh 'ls -la'
                 sh 'npm run build'
