@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('NPM command') {
             steps {
-                sh 'ls --la'
+                sh 'ls -la'
                 sh 'npm run build'
             }
         }
