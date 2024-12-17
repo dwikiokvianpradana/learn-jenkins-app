@@ -10,8 +10,12 @@ pipeline {
             }
         }
             steps {
-                sh 'ls -la'
-                sh 'npm run build'
+                sh '''
+                    ls -la
+                    npm --version
+                    npm ci
+                    npm run build
+                '''
             }
         }
         stage('NPM test') {
