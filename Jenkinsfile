@@ -1,20 +1,24 @@
 pipeline {
-    agent any
+    agent {
+            docker {
+                image 'node:slim'
+            }
+    }
 
     stages {
         stage('Hello') {
             steps {
-                echo 'Hello World'
+                sh 'npm --version'
             }
         }
         stage('NPM command') {
-            agent {
-                docker {
-                    image 'node:slim'
-                }
-            }
             steps {
-                sh 'npm --version'
+                sh 'npm run build'
+            }
+        }
+        stage('NPM test') {
+            steps {
+                sh 'npm run test'
             }
         }
     }
