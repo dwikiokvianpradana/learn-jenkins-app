@@ -2,19 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
-            agent {
-                docker {
-                    image 'node:slim'
-                    reuseNode true
-            }
-        }
-            steps {
-                sh 'npm --version'
-            }
-        }
         stage('NPM command') {
             steps {
+                sh 'ls --la'
                 sh 'npm run build'
             }
         }
