@@ -7,10 +7,11 @@ pipeline {
                 docker {
                     image 'node:slim'
                     reuseNode true
+                }
             }
-        }
             steps {
                 sh '''
+                    whoami
                     ls -la
                     npm --version
                     npm ci
@@ -23,10 +24,14 @@ pipeline {
                 docker {
                     image 'node:slim'
                     reuseNode true
+                }
             }
-        }
             steps {
-                sh 'npm run test'
+                sh '''
+                    whoami
+                    ls -la
+                    npm run test
+                '''
             }
         }
     }
