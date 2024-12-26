@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('NPM command') {
+        stage('Install Dependency') {
             agent {
                 docker {
                     image 'node:slim'
@@ -11,10 +11,19 @@ pipeline {
             }
             steps {
                 sh '''
-                    whoami
-                    ls -la
-                    npm --version
                     npm ci
+                '''
+            }
+        }
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:slim'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
                     npm run build
                 '''
             }
@@ -28,8 +37,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    whoami
-                    ls -la
                     npm run test
                 '''
             }
